@@ -1,6 +1,6 @@
 <?php
 /*
-UserSpice 3
+UserSpice 3.3.0
 by Dan Hoover at http://UserSpice.com
 Major code contributions by Astropos
 

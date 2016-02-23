@@ -22,6 +22,9 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 //Log the user out
 if(isUserLoggedIn())
 {
+	$ip = getIP();
+	writeAudit($loggedInUser->user_id,$ip,$loggedInUser->user_id,2,lang("SIGNOUT_AUDITTEXT",""));
+
 	$loggedInUser->userLogOut();
 }
 

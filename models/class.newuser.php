@@ -167,6 +167,9 @@ class User
 				$stmt->bind_param("s", $inserted_id);
 				$stmt->execute();
 				$stmt->close();
+				$ip = getIP();				
+				writeAudit($inserted_id,$ip,$inserted_id,5,lang("SIGNUP_AUDITTEXT",""));
+				
 			}
 		}
 	}

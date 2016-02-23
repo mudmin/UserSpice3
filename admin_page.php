@@ -94,20 +94,20 @@ $permissionData = fetchAllPermissions();
 
 
 <div class="container-fluid" style="">
-  
+
       <div class="row row-offcanvas row-offcanvas-left">
-        
+
          <div class="col-sm-6 col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
 				<p class="visible-xs">
                 <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
               </p>
-	
+
 	<?php require_once("models/left-nav.php"); ?>
 
    </div><!--/span-->
-        
+
     <div class="col-sm-6 col-md-9 col-lg-10 main">
-   
+
 	  <!--toggle sidebar button-->
 	  <p class="visible-xs">
 		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
@@ -119,7 +119,7 @@ $permissionData = fetchAllPermissions();
     <div class="col-md-12">
       <h1>Admin Page</h1>
       <!-- CONTENT GOES HERE -->
-  
+
 			  <form name="adminPage" action="<?php echo $_SERVER['PHP_SELF'];?>?id=<?php echo $pageId; ?>" method="post">
 			  <input type="hidden" name="process" value="1">
 
@@ -140,7 +140,7 @@ $permissionData = fetchAllPermissions();
 			 <div class="form-group">
 			  <label for="private">Private:</label>
 
-			 <?php //Display private checkbox 
+			 <?php //Display private checkbox
 				if ($pageDetails['private'] == 1){
 				echo '<input type="checkbox" name="private" id="private" value="Yes" checked>';
 			  }
@@ -151,7 +151,7 @@ $permissionData = fetchAllPermissions();
 			  </div>
 		 </div> <!-- /col -->
 
-		<div class="col-md-6">		 
+		<div class="col-md-6">
 				<h3>Page Access</h3>
 
 				<div class="form-group">
@@ -165,8 +165,8 @@ $permissionData = fetchAllPermissions();
 			  }
 				?>
 				</ul>
-			</div>	
-		
+			</div>
+
 			<div class="form-group">
 			<label>Add Access:</label>
 			<ul>
@@ -180,11 +180,11 @@ $permissionData = fetchAllPermissions();
 			  ?>
 			  </ul>
 			</div>
- 
+
 		 </div> <!-- /col -->
-	</div> <!-- /row -->			
-			
-			
+	</div> <!-- /row -->
+
+
 		<div class="row">
 			<div class="col-md-12">
 				<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
@@ -197,16 +197,16 @@ $permissionData = fetchAllPermissions();
 			</div>
 		</div>
 </form>
-			
+
 	 </div> <!-- /col -->
 
-  
+
 </div> <!-- /row -->
 
 
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>
-	
+
       </div><!--/main-split-row-->
 	</div>
 </div><!--/.container-->

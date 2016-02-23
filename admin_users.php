@@ -85,7 +85,7 @@ $userData = fetchAllUsers(); //Fetch information for all users
 	
 		<?php //Cycle through users
       foreach ($userData as $v1) {
-        echo "
+	   echo "
         <tr>
         <td>	<div class='form-group'><input type='checkbox' name='delete[".$v1['id']."]' id='delete[".$v1['id']."]' value='".$v1['id']."'></div></td>
         <td><a href='admin_user.php?id=".$v1['id']."'>".$v1['user_name']."</a></td>
@@ -99,7 +99,8 @@ $userData = fetchAllUsers(); //Fetch information for all users
           echo "Never";
         }
         else {
-          echo date("j M, Y", $v1['last_sign_in_stamp']);
+		$agodate = ago($v1['last_sign_in_stamp']);
+          echo date("j M, Y", $v1['last_sign_in_stamp']) . ' ('.$agodate.' ago)';
         }
         echo "
         </td>
@@ -130,7 +131,7 @@ $userData = fetchAllUsers(); //Fetch information for all users
 $(document).ready(function(){  
  
  $( "#Submit" ).click(function(e) {
-	 	var answer = confirm("Delete User - Are you sure?")
+	 	var answer = confirm("Delete User(s) - Are you sure?")
 		if (answer)
 			{
 			return true;

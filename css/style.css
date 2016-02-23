@@ -1,39 +1,16 @@
 body { }
-#footer { max-width: 330px; text-align: Center;  padding: 15px; margin: 0 auto; }
 
-@media screen and (max-width: 768px) {
-	.row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
+/* Little Tweaks - styles */
+#footer { max-width: 540px; text-align: Center;  padding: 15px; margin: 0 auto; }
+.navbar-brand {padding: 0px;}
+li { list-style: none;}
 
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -66%;
-  }
+/* Dashboard styles */
+.acctable { height: 180px; overflow-y: scroll;}
+.flotcontainer { height: 180px;}
+.giant { font-size: 3em; padding: 12px;}
 
-  .row-offcanvas-left.active {
-    left: 66%;
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 66%;
-    margin-left: 10px;
-  }
-  
-  .nav-sidebar > li > a {
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.giant { font-size: 2em;}
-  
-}
-
+/* Form styles */
 .form-signup {
   max-width: 640px;
   padding: 15px;
@@ -74,3 +51,39 @@ body { }
   border-top-right-radius: 0;
 }
 
+
+
+/* The minimum for effective responsive - styles */
+@media screen and (max-width: 768px) {
+	.row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -66%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 66%;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 66%;
+    margin-left: 10px;
+  }
+  
+  .nav-sidebar > li > a {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.flotcontainer { height: 120px;}
+.giant { font-size: 2em; padding: 6px;}
+  
+}

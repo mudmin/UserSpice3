@@ -17,20 +17,25 @@ UserCake V2.0 designed by: Jonathan Cassels
 */
 require_once("settings.php");
 ?>
+
+
+
 <div class="container" style="">
 	<div class="row">
 	  <div class="col-md-12">
 		<div id="footer">
 			<footer>
 			  &copy; <?php echo $copyright_message; ?>
-			  <?php if($your_public_key  == "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI") {
-				echo "<h3>For security reasons, you need to change your reCAPTCHA key.</h3>";
-			  }
-			  ?>
 			</footer>
 		</div>
 	  </div>
 	</div>
+	
+				  <?php if($your_public_key  == "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI") {
+				echo '<div class="alert alert-danger" role="alert">For security reasons, you need to change your reCAPTCHA key.</div>';
+			  }
+			  ?>
+	
 </div>
 
 

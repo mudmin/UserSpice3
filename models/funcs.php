@@ -15,6 +15,22 @@ UserCake V2.0 designed by: Jonathan Cassels
 
 
 */
+// 2016 Functions for 3.2 Refreshed
+function fetchUserjson()
+	{
+	// Example query
+	global $mysqli,$db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT COUNT(permission_id) AS sum1,permission_id,name
+	FROM ".$db_table_prefix."user_permission_matches LEFT JOIN ".$db_table_prefix."permissions ON permission_id = ".$db_table_prefix."permissions.id  GROUP BY permission_id");
+	$stmt->execute();
+	$stmt->bind_result($sum1, $permission,$name);
+	while ($stmt->fetch())
+		{
+		$row[] = array('sum1' => $sum1, 'permission_id' => $permission, 'name' => $name);
+		}
+	$stmt->close();
+	return ($row);
+	}
 
 //Functions that do not interact with DB
 //------------------------------------------------------------------------------

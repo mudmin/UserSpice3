@@ -116,7 +116,7 @@ if ($response != null && $response->success) {
 
 	<div class="form-signup">
 		<form class="" name="newUser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-			<h2 class="form-signin-heading">Register</h2>
+			<h2 class="form-signin-heading"><i class="fa fa-flask"></i> <?php echo lang("SIGNUP_TEXT","");?></h2>
 
 			<div class="form-group">
 				<label for="username">Choose a Username</label>
@@ -150,7 +150,7 @@ if ($response != null && $response->success) {
 				<div class="g-recaptcha" data-sitekey="<?php echo $publickey; ?>"></div>
 			</div>
 
-			<button class="submit  btn btn-lg btn-primary btn-block" type="submit">Register</button>
+			<button class="submit  btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-plus-square"></i> <?php echo lang("SIGNUP_BUTTONTEXT","");?></button>
 			<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
 
 		</form>

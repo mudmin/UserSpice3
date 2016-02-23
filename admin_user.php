@@ -152,6 +152,25 @@ if(!empty($_POST))
 $userPermission = fetchUserPermissions($userId);
 $permissionData = fetchAllPermissions();
 
+$display_activitydata = '';
+$activityData = fetchUserAudit($userId); 
+//Cycle through activity data
+  foreach ($activityData as $v1)
+		{
+		$accuserid = ($v1['audit_userid'] == 666) ? 0 : $v1['audit_userid']; // do something with baddies
+		$accagodate = ago($v1['audit_timestamp']);
+		$accaudate = date("d/M/Y G:i:s",$v1['audit_timestamp']);
+		$adisp_rowc = ($v1['audit_eventcode'] == 3) ? "alert alert-danger" : '';
+		$display_activitydata .= '
+		<tr class="'.$adisp_rowc.'">
+		<td>'.$accagodate.'</td>
+		<td>'.$v1['audit_userip'].'</td>
+		<td>'.$v1['audit_eventcode'].'</td>
+		<td>'.$v1['audit_action'].'</td>
+		</tr>
+		';
+		}
+
 ?>
 <div class="container-fluid" style="">
   
@@ -229,7 +248,10 @@ $permissionData = fetchAllPermissions();
 
 					<div class="form-group">
 					  <label for="display">Sign Up:</label>
-					  <?php echo date("j M, Y", $userdetails['sign_up_stamp']);?>
+					  <?php 
+						$agodate = ago($userdetails['sign_up_stamp']);
+						echo date("j M, Y", $userdetails['sign_up_stamp']) . ' ('.$agodate.' ago)';
+						?>
 					  </div>
 					  
 					<div class="form-group">
@@ -240,16 +262,17 @@ $permissionData = fetchAllPermissions();
 						echo "Never";
 					  }
 					  else {
-						echo date("j M, Y", $userdetails['last_sign_in_stamp']);
+					  	$agodate = ago($userdetails['last_sign_in_stamp']);
+						echo date("j M, Y", $userdetails['last_sign_in_stamp']) . ' ('.$agodate.' ago)';
 					  }
 					  ?>
 					  </div>
 
 
-					<div class="form-group">
-					  <label>Delete (No warning):</label>
-					  <input type="checkbox" name="delete[<?php echo $userdetails['id'];?>]" id="delete[<?php echo $userdetails['id'];?>]" value="<?php echo $userdetails['id'];?>">
-					  </div>
+					<!-- <div class="form-group">
+					  <label>Delete User:</label>
+					  <input class="deluser" type="checkbox" name="delete[<?php echo $userdetails['id'];?>]" id="delete[<?php echo $userdetails['id'];?>]" value="<?php echo $userdetails['id'];?>">
+					  </div> -->
 					  
 				</div><!-- /col -->
 				
@@ -280,7 +303,33 @@ $permissionData = fetchAllPermissions();
 						  }
 						  ?>
 							</ul>			  
-					 </div>					 
+					 </div>	
+
+				<hr />
+				
+			<h3>User Activity</h3>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+				   <div class="acctable table-responsive">
+					<table class="table">
+					  <thead>
+						<tr>
+						  <th>When</th>
+						  <th>Where</th>
+						  <th>What</th>
+						  <th>Why</th>
+						 </tr>
+					  </thead>
+					  <tbody>
+					  <?php echo $display_activitydata;?>
+					  </tbody>
+					</table>
+				  </div>					
+		
+					
+			  </div>
+			</div>
+					 
 				
 				</div><!-- /col -->
 				
@@ -314,24 +363,5 @@ $permissionData = fetchAllPermissions();
 	</div>
 </div><!--/.container-->
 <!-- Place any per-page javascript here -->
-
-<script type="text/javascript">
-$(document).ready(function(){  
- 
- $( "#Submit" ).click(function(e) {
- 
-	 	var answer = confirm("Delete User - Are you sure?")
-		if (answer)
-			{
-			return true;
-			}
-		else	
-			{
-			return false;
-			}
-		});
-       
-    });
-</script>
 
 <?php require_once("models/html_footer.php"); // currently just the closing /body and /html ?>

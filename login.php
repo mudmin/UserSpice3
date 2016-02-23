@@ -89,7 +89,10 @@ if ($response != null && $response->success) {
 			if($entered_pass != $userdetails["password"])
 			{
 
-				$errors[] = lang("ACCOUNT_USER_OR_PASS_INVALID"); //MAKE UPGRADE CHANGE HERE
+				$errors[] = lang("ACCOUNT_USER_OR_PASS_INVALID");
+				//MAKE UPGRADE CHANGE HERE
+				$ip = getIP();
+				writeAudit(666,$ip,666,3,lang("SIGNIN_FAIL","")); 
 
 			}
 			else
@@ -106,7 +109,11 @@ if ($response != null && $response->success) {
 				$loggedInUser->displayname = $userdetails["display_name"];
 				$loggedInUser->username = $userdetails["user_name"];
 
+				$_SESSION['ll'] = $userdetails["last_sign_in_stamp"];
+				$_SESSION['lt'] = time();
 
+				$ip = getIP();
+				writeAudit($loggedInUser->user_id,$ip,$loggedInUser->user_id,1,lang("SIGNIN_AUDITTEXT",""));
 				//Update last sign in
 				$loggedInUser->updateLastSignIn();
 				$_SESSION["userCakeUser"] = $loggedInUser;
@@ -131,7 +138,7 @@ if ($response != null && $response->success) {
 
 		<form class="" name="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading"><i class="fa fa-flask"></i> <?php echo lang("SIGNIN_TITLE","");?></h2>
 
 	  <div class="form-group">
         <label for="username">Username</label>
@@ -146,16 +153,16 @@ if ($response != null && $response->success) {
 		<div class="g-recaptcha" data-sitekey="<?php echo $publickey; ?>"></div>
 	</div>
 
-	<button class="submit  btn btn-lg btn-primary btn-block" type="submit">Login</button>
+	<button class="submit  btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-sign-in"></i> <?php echo lang("SIGNIN_BUTTONTEXT","");?></button>
 	<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
 	</form>
 
 		<div class="row">
 			<div class="col-xs-6">
-				<a class="pull-left" href='forgot-password.php'>Forgot Password</a>
+				<a class="pull-left" href='forgot-password.php'><i class="fa fa-wrench"></i> Forgot Password</a>
 			</div>
 			<div class="col-xs-6">
-				<a class="pull-right" href='register.php'>Sign Up</a>
+				<a class="pull-right" href='register.php'><i class="fa fa-plus-square"></i> <?php echo lang("SIGNUP_TEXT","");?></a>
 			</div>
 		</div>
 

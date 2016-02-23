@@ -15,10 +15,10 @@ UserCake V2.0 designed by: Jonathan Cassels
 
 
 */
-require_once("models/config.php");
+require_once("../models/config.php");
 if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
-<?php require_once("models/top-nav.php"); ?>
+<?php require_once("../models/top-nav.php"); ?>
 
 <!-- If you are going to include the sidebar, do it here -->
 

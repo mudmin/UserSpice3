@@ -182,7 +182,6 @@ $permissionData = fetchAllPermissions(); //Retrieve list of all permission level
 			</h1>
 			<!-- CONTENT GOES HERE -->
 			<?php
-			echo resultBlock($errors,$successes);
 
 			echo "
 			<form name='adminConfiguration' action='".$_SERVER['PHP_SELF']."' method='post'>

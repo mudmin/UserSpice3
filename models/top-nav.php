@@ -81,39 +81,43 @@ UserCake V2.0 designed by: Jonathan Cassels
 			   <li class="divider"></li>
                <li><a href="account.php"><i class="fa fa-fw fa-user"></i> User Account</a></li>
                <li><a href="user_settings.php"><i class="fa fa-fw fa-pencil-square-o"></i> User Settings</a></li>
-			<li><a href="logout.php"><i class="fa fa-fw fa-sign-out"></i> Log Out</a></li>
+			<li><a href="logout.php"><i class="fa fa-fw fa-sign-out"></i> <?php echo lang("SIGNOUT_TEXT","");?></a></li>
             </ul>
         </li>
 		  <?php //Links for permission level 2 (default admin)
 			if ($loggedInUser->checkPermission(array(2))){   ?>
 
 			<li class="hidden-sm hidden-md hidden-lg"><a href="admin_users.php"><i class="fa fa-fw fa-users"></i> Manage Users</a></li>
+			<li class="hidden-sm hidden-md hidden-lg"><a href="admin_dashboard.php"><i class="fa fa-fw fa-cogs"></i> Admin Dashboard</a></li>
 			<li class="hidden-sm hidden-md hidden-lg"><a href="admin_configuration.php"><i class="fa fa-fw fa-wrench"></i> Admin Configuration</a></li>
 			<li class="hidden-sm hidden-md hidden-lg"><a href="admin_permissions.php"><i class="fa fa-fw fa-code"></i> Admin Permissions</a></li>
 			<li class="hidden-sm hidden-md hidden-lg"><a href="admin_pages.php"><i class="fa fa-fw fa-newspaper-o"></i> Admin Pages</a></li>
 
+			<li class="hidden-xs"><a href="admin_dashboard.php"><i class="fa fa-fw fa-cogs"></i> Admin Dashboard</a></li>
+			
 			<li class="dropdown hidden-xs">
-				<a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin Menu <b class="caret"></b></a>
+				<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-flask"></i> Admin Menu <b class="caret"></b></a>
 				<ul class="dropdown-menu ">
 					<li><a href="admin_users.php"><i class="fa fa-fw fa-users"></i> Manage Users</a></li>
 					<li class="divider"></li>
+					<li><a href="admin_dashboard.php"><i class="fa fa-fw fa-cogs"></i> Admin Dashboard</a></li>
 					<li><a href="admin_configuration.php"><i class="fa fa-fw fa-wrench"></i> Admin Configuration</a></li>
 					<li><a href="admin_permissions.php"><i class="fa fa-fw fa-code"></i> Admin Permissions</a></li>
 					<li><a href="admin_pages.php"><i class="fa fa-fw fa-newspaper-o"></i> Admin Pages</a></li>
-					<li><a href="logout.php"><i class="fa fa-fw fa-sign-out"></i> Log Out</a></li>
+					<li><a href="logout.php"><i class="fa fa-fw fa-sign-out"></i> <?php echo lang("SIGNOUT_TEXT","");?></a></li>
 				</ul>
 			</li>
 			<?php } // is user an admin ?>
 
-		<li class="hidden-sm hidden-md hidden-lg"><a href="logout.php"><i class="fa fa-fw fa-sign-out"></i> Log Out</a></li>
+		<li class="hidden-sm hidden-md hidden-lg"><a href="logout.php"><i class="fa fa-fw fa-sign-out"></i> <?php echo lang("SIGNOUT_TEXT","");?></a></li>
 
 		<?php }
 		else	{ // user is not and admin OR logged in
 		?>
-		<li><a href="login.php" class=""><i class="fa fa-sign-in"></i> Sign In</a></li>
-		<li><a href="register.php" class=""><i class="fa fa-plus-square"></i> Sign Up</a></li>
+		<li><a href="login.php" class=""><i class="fa fa-sign-in"></i> <?php echo lang("SIGNIN_TEXT","");?></a></li>
+		<li><a href="register.php" class=""><i class="fa fa-plus-square"></i> <?php echo lang("SIGNUP_TEXT","");?></a></li>
 		<li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-question-circle"></i> <?php echo lang("NAVTOP_HELPTEXT","");?></a>
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-life-ring"></i> <?php echo lang("NAVTOP_HELPTEXT","");?></a>
             <ul class="dropdown-menu">
 				<li><a href="forgot-password.php"><i class="fa fa-wrench"></i> Forgot Password</a></li>
 				<li><a href="resend-activation.php"><i class="fa fa-exclamation-triangle"></i> Resend Activation Email</a></li>

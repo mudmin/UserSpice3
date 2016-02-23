@@ -15,8 +15,16 @@ UserCake V2.0 designed by: Jonathan Cassels
 
 
 */
+//Direct to install directory, if it exists
+if(is_dir("models/install/install"))
+{
+	header("Location: models/install/index.php");
+	die();
+
+}
 
 require_once("settings.php");
+require_once("user_spice_ver.php");
 
 GLOBAL $errors;
 GLOBAL $successes;
@@ -33,12 +41,6 @@ if(mysqli_connect_errno()) {
 	exit();
 }
 
-//Direct to install directory, if it exists
-if(is_dir("install/"))
-{
-	header("Location: install/");
-	die();
 
-}
 
 ?>
