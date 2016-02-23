@@ -1,0 +1,7 @@
+Located in this folder are files that are recommended, but not required.  
+They are meant to be in the root folder of your site but were not put 
+there during installation because we did not want to overwrite any 
+important files. Copy them one by one. Use them all or use none of 
+them. It's up to you. Many of these files are designed to make your
+site more responsive or to set policies for the site. It's all standard
+bootstrap stuff.

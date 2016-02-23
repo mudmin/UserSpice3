@@ -1,0 +1,9 @@
+The plan is to make the install file a lot more comprehensive, which will probably break things from time to time.
+
+In the event the automated installer breaks, feel free to follow these instructions for a manual install.
+
+1. Make sure your database connection settings are correct in models/db-settings.php
+2. Unzip the file called sql.zip in the root directory
+3. Load phpmyadmin or your database tool of choice and import the sql dump.
+4. Your default username will be admin and the password is password.
+5. Delete the sql dump and zip file from your root directory.

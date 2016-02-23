@@ -1,0 +1,127 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+This project was originally based on Version 2.0.2 of UserCake (usercake.com), which was released in 2012.
+
+
+### 3.1.0 - 2016-01-23
+### Changed
+- Deleted some unneccesary files
+- Added all the classes that are being used in version 4.0 and are being documented on UserSpice.com.  They are not being used
+    in version 3.x, but they are there so users can get to know them.  They're completely optional. 
+- Added .htaccess to some folders. Will add more after testing.
+- Used Google's own test keys as defaults for ReCAPTCHA - Thanks to user astropos for pointing this out
+- Added ini_set("allow_url_fopen", 1); to the top of login and register files to deal with server incompatibilities for some
+  users. Thank you so much Em for giving me a day on your server to properly track this down. 
+- Thanks to feedback and coding from user astropos, I broke the footer into two files to allow users to use per-page javascript.
+- All code was reindented.  
+
+
+
+
+### 3.0.4 - 2016-01-04
+### Changed
+- Much appreciation to users DaVaR and Dylan
+- Fixed headers already sent error that some users were experiencing
+- Moved the recaptcha script back to the actual login and register files from the recaptcha.config.php file to avoid some errors.
+- Made a few changes to the installer
+
+### 3.0.3b - 2016-01-02
+### Changed
+- Changed the variable and added an = to the footer to prevent an error for some people.
+- Removed a space at the beginning of recaptcha.config.php that could have been causing header issues for some people. 
+
+
+### 3.0.3 - 2015-12-28
+### Changed
+- Fixed a bug (thanks to user Blur) where the "forgotten password" was being encrypted with the old password hash instead of bcrypt.  
+- Began working on DaVaR's (creator of UserApplePie) check to see if the database has already been installed before reinstalling.
+- Implemented the missing = for the reCAPTCHA nag from DaVaR and confirmed by dowen12.
+- Started Output Buffering in the TopNav thanks to a lot of bug tracking from DaVaR and Blur
+- Updated instructions to reflect changes in system requirements. 
+- Added a basic version check to the install. The entire install routine is due to be rewritten in the near future. 
+
+
+### 3.0.2 - 2015-12-15
+### Changed
+- Removed the sidebar for better responsive design
+- Created a simple/responsive account-nav.php menu that will be prettier in the next version.
+- Moved all important settings to settings.php (DB, Captcha, Stripe, Copyright Message) - Thanks DaVaR for the idea
+- Created a homepage on index.php to point new users in the right direction
+- Restyled error and success messages - Thanks to DaVar
+- Fixed reCAPTCHA bypass bug caused by my dumb mistake.  Better reCAPTCHA success/fail statements coming
+* Better default permissions will come with the next version, so make sure to set your permission levels for each page
+
+
+
+
+### 3.0.1 - 2015-12-10
+### Changed
+- Fixed some bugs in the installer with thanks to Zach for the help
+- Moved some code from db-settings.php back to config.php.  There are now two config.php files (one is a class). That will change.
+- Created documentation and a method for installing for users whose installation fails.  
+- Updated the install file slightly to explain the process a bit more.  Full overhaul coming soon. 
+
+### 3.0.0 - 2015-12-09
+### Changed
+- bcrypt encryption to replace the antiquated encryption of UserCake and Userspice 2.x products
+- New tools for migrating users from the old encryption to the new (see instructions)
+- Token system on all forms to help mitigate XSS and CSRF
+- New customizable Token, Config, and Session Classes
+- New (easily customizable logo) located in images/logo.png
+
+## In Progress
+- Autoload classes function being tested (currently commented out)
+- Stripe integration (Keys can be put in db-config.php)
+- Additional security measures
+- Multi-folder support
+
+
+
+### 2.5.5 - 2015-12-02
+### Changed
+- Rolled the design language, UI, and UX features from UserSpice 3.0 into version 2.5 to promote a smooth transition.
+- Prepared code for release as a standalone and upgrade version.
+- Moved reCAPTCHA demo key nag to the footer
+- Adjusted some CSS (inline) in the header.  
+
+### [2.5.4] - 2015-12-01
+### Changed
+- Removed the old reCAPTCHA 1.x and upgraded to version 2. This feature was originally planned for UserSpice 3.0, but it works better so I retrofitted it. 
+
+
+### [2.5.3] - 2015-12-01
+### Changed
+- Turned the top login form to dynamic login/logout/sign up/account info buttons to reduce risk of brute forcing. 
+
+### [2.5.2] - 2015-11-30
+### Changed
+- Created dummy reCAPTCHA keys that need to be changed on install
+- Integrated reCAPTCHA into the registration form
+- Integrated reCAPTCHA into the primary login form
+- Added a nag on login and register pages for people using the default reCAPTCHA keys
+- NOTE: reCAPTCHA work was made much easier thanks to a rewritten guide by opendna over at usercake.com
+- NOTE: The newer, fancier version of reCAPTCHA will be part of version 3.0.0 and beyond
+
+### [2.5.1] - 2015-11-30
+### Changed
+- Brought over messaging CSS from version 2.0.2 into the uc-main.css file
+- Fixed an issue caused by the header login form.
+
+
+
+### [2.5.0] - 2015-11-30
+### Changed
+- This version was primarily designed to be a drag and drop upgrade of version 2.0.2 of UserCake
+- Converted entire project to Bootstrap for responsive design
+- Created new header, footer, and menus which now reside in the models folder
+- Moved branding to models/top-nav.php so it can be changed much easier
+- Moved copyright to the models/footer.php
+- Renamed CSS so it would not conflict with other Bootstrap projects
+- Created a dynamic login form in header that changes when user is logged in
+- Added Google Analytics to models/footer.php but left it commented out so user can put in credentials
+- Made Bootstrap Jumbotron feature available but commented out on each page
+- Created a User Control Panel (models/left-nav.php) which is functional but will be restyled
+- An index.bak.php was created to be renamed index.php if the project does not already have a homepage
+- A folder named stuff was created that contains useful and recommended files
+- An admin_blank.php file was created in the /stuff folder to serve as a template for extending the user system
+- A blank-page.php file was created in the /stuff folder to be a template for other site pages
