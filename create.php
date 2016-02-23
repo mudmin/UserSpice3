@@ -10,6 +10,7 @@ UserCake Version: 2.0.2
 
 UserCake created by: Adam Davis
 UserCake V2.0 designed by: Jonathan Cassels
+
 */
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
@@ -22,10 +23,14 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
 
+<!-- If you are going to include the sidebar, do it here -->
+<?php //require_once("models/left-nav.php"); ?>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
 <!-- PHP GOES HERE -->
 <?php
 //Prevent the user visiting the logged in page if he/she is already logged in
-if(isUserLoggedIn()) { header("Location: account.php"); die(); }
 
 //Forms posted
 if(!empty($_POST))
@@ -37,20 +42,6 @@ if(!empty($_POST))
   $password = trim($_POST["password"]);
   $confirm_pass = trim($_POST["passwordc"]);
 
-  //reCAPTCHA 2.0 check
-  // empty response
-  $response = null;
-
-  // check secret key
-  $reCaptcha = new ReCaptcha($privatekey);
-
-  // if submitted check response
-  if ($_POST["g-recaptcha-response"]) {
-    $response = $reCaptcha->verifyResponse(
-    $_SERVER["REMOTE_ADDR"],
-    $_POST["g-recaptcha-response"]
-  );
-}
 if ($response != null && $response->success) {
 
   if(minMaxRange(5,25,$username))
@@ -96,8 +87,7 @@ if ($response != null && $response->success) {
     else
     {
       //Attempt to add the user to the database, carry out finishing  tasks like emailing the user (if required)
-      if(!$user->userCakeAddUser())
-      {
+      if(!$user) { userSpice()
         if($user->mail_failure) $errors[] = lang("MAIL_ERROR");
         if($user->sql_failure)  $errors[] = lang("SQL_ERROR");
       }
@@ -110,56 +100,76 @@ if ($response != null && $response->success) {
 }
 ?>
 
-<div class="container">
+<div id="page-wrapper">
 
-	 <?php 	echo resultBlock($errors,$successes); ?>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
 
-	<div class="form-signup">
-		<form class="" name="newUser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-			<h2 class="form-signin-heading">Register</h2>
-
-			<div class="form-group">
-				<label for="username">Choose a Username</label>
-				<input  class="form-control" type="text" name="username" id="username" placeholder="Username" required autofocus>
-				<p class="help-block">No Spaces or Special Characters - Min 5 characters</p>
-			</div>
-
-			<div class="form-group">
-				<label for="displayname">Choose Display Name</label>
-				<input  class="form-control" type="text" name="displayname" id="displayname" placeholder="Display Name" required >
-				<p class="help-block">No Spaces or Special Characters - Min 5 characters</p>
-			</div>
-
-			<div class="form-group">
-				<label for="password">Choose a Password</label>
-				<input  class="form-control" type="password" name="password" id="password" placeholder="Password" required >
-				<p class="help-block">Password (Min 8 Characters)</p>
-			</div>
-
-			<div class="form-group">
-				<label for="passwordc">Confirm Password</label>
-				<input  class="form-control" type="password" name="passwordc" id="passwordc" placeholder="Confirm Password" required >
-			</div>
-
-			<div class="form-group">
-				<label for="email">Email Address</label>
-				<input  class="form-control" type="text" name="email" id="email" placeholder="Email Address" required >
-			</div>
-
-			<div class="form-group">
-				<div class="g-recaptcha" data-sitekey="<?php echo $publickey; ?>"></div>
-			</div>
-
-			<button class="submit  btn btn-lg btn-primary btn-block" type="submit">Register</button>
-			<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
-
-		</form>
+  <!-- <div class="jumbotron">
+  <div class="container">
+  <h1>Jumbotron!!!</h1>
+  <p>This is a great area to highlight something.</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+</div>
+</div> -->
 
 
-	  </div>
-</div> <!-- /container -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <h1 class="page-header">
+      Register
+    </h1>
+    <!-- CONTENT GOES HERE -->
 
 
+    <?php
+    echo resultBlock($errors,$successes);
+
+    echo "
+    <div id='regbox'>
+    <form name='newUser' action='register.php' method='post'>
+
+    <p>
+    <label>User Name (No Spaces or Special Characters - Min 5 characters):</label>
+    <input class='form-control' type='text' name='username' />
+    </p>
+    <p>
+    <label>Display Name (No Spaces or Special Characters - Min 5 characters):</label>
+    <input class='form-control' type='text' name='displayname' />
+    </p>
+    <p>
+    <label>Password (Min 8 Characters):</label>
+    <input class='form-control' type='password' name='password' />
+    </p>
+    <p>
+    <label>Confirm Password:</label>
+    <input class='form-control' type='password' name='passwordc' />
+    </p>
+    <p>
+    <label>Email:</label>
+    <input class='form-control' type='text' name='email' />
+    </p>
+      <p>
+        <label>&nbsp;<br>
+          <input class='btn btn-primary' type='submit' value='Register'/>";?>
+        </p>
+
+      </form>
+
+    </div>
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 <!-- footers -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>

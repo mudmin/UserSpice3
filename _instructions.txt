@@ -1,13 +1,13 @@
 ***What's Included
 UserSpice is designed to be the basis of your next PHP/HTML project.  It's designed using Bootstrap and other
-relatively universal web tools.
+relatively universal web tools. 
 
 For your convenience, we've also included a /blank_pages folder with an easy to use template for the site with
 	and without a sidebar.
-
+	
 Additionally, we've included some bootstrap html files under /blank_pages/special_blanks that can give you some
 	bootstrap inspiration and serve as templates
-
+	
 Where possible, we have maintained the original file structure and file names from the original UserCake project.
 
 
@@ -21,7 +21,7 @@ This option is primarily for developmental purposes.  You are probably better of
 
 2. Create a database on your server or web host
 
-3. Open the file models/settings.php and fill out your database connection settings, copyright message, and reCAPTCHA keys (and Stripe settings if you wish).
+3. Open the file models/settings.php and fill out your database connection settings, copyright message, and reCAPTCHA keys (and Stripe settings if you wish). 
 If you don't have them, they can be obtained at https://www.google.com/recaptcha/admin
 
 NOTE: If you choose to use the default keys, they will work for a short time for testing purposes, but you will receive a nag in the footer
@@ -29,12 +29,12 @@ and these keys can/will stop working at any time. Don't be lazy. Get your own ke
 
 4. To use the installer visit http://yourdomain.com/install/ in your browser. UserSpice will attempt to build the database for you. After completion
    delete the install folder.
-
+   
 5. visit http://yourdomain.com and create a new user immediately as it will be your default administrator.
 
 6. Be sure to login and go to Admin Configuration and set your Website Name, and Especially Website URL and Email so everything will work properly.
 
-Visit http://userspice.com if you have any issues and feel free to check out the inspiration project, http://usercake.com for all their documentation as well.
+Visit http://userspice.com if you have any issues and feel free to check out the inspiration project, http://usercake.com for all their documentation as well. 
 
 7 Make sure to visit your admin section and set the permissions for each page to your liking. There will be better default settings in a future release.
 
@@ -43,7 +43,7 @@ Visit http://userspice.com if you have any issues and feel free to check out the
 ***Upgrading from UserCake 2.x or earlier version of UserSpice 2.x
 This assumes you have a working install of UserCake or UserSpice.
 Please note: some files have changed names and locations between UserSpice 3 and all previous versions.  If you have not modified your existing UserSpice
-files, you might want to consider deleting them and just extracting this entire archive into your root.
+files, you might want to consider deleting them and just extracting this entire archive into your root. 
 
 1. Decide if you want to use your existing index.php file or the one included with this archive. If you don't need
 the included index.php, remove or rename it.
@@ -52,8 +52,8 @@ the included index.php, remove or rename it.
 
 3. Copy all the files from this archive and overwrite your existing files.
 
-4. Open the file models/settings.php and fill out your database connection settings, copyright message, and reCAPTCHA keys (and Stripe settings if you wish).
-PLEASE NOTE: db-settings.php and settings.php are vastly different from previous versions, so you cannot use your old file like you could when
+4. Open the file models/settings.php and fill out your database connection settings, copyright message, and reCAPTCHA keys (and Stripe settings if you wish). 
+PLEASE NOTE: db-settings.php and settings.php are vastly different from previous versions, so you cannot use your old file like you could when 
 upgrading from 2.0 to 2.5
 
 If you don't have them, they can be obtained at https://www.google.com/recaptcha/admin
@@ -65,7 +65,7 @@ virtually useless.  You will need begin the migration process. The first thing y
 
 A.  To use the temporary password 'password' login to phpmyadmin and uc_users and select your own account.  Replace the existing password with
 	$2y$12$vU1a9Jp1UJu5E12y/RM6s.6UUiOclUWUl7htOAqh5R2.JS/QSKiNu
-	You should be able to login normally.
+	You should be able to login normally. 
 
 B. 	Create a new account with the password you want to use and copy that user's password in phpmyadmin to yours and delete that temporary user.
 
@@ -73,13 +73,13 @@ Now that you've dealt with your account, you have to make this right with your u
 in the event someone tries to login with the correct username, but the wrong password. Nothing too obvious that could make this look like a good brute force
 avenue (even though even the correct password wouldn't work!)
 
-In login.php change
+In login.php change 
 $errors[] = lang("ACCOUNT_USER_OR_PASS_INVALID"); //MAKE UPGRADE CHANGE HERE
 to
 $errors[] = lang("ACCOUNT_USER_OR_PASS_INVALID2"); //MAKE UPGRADE CHANGE HERE
 
 Then in models/languages/en.php feel free to edit what that warning is.  It currently sends people to the "forgot password" page where they can update their password and go on with life.
-"ACCOUNT_USER_OR_PASS_INVALID2"		=> "We have upgraded our technology to better protect your account.<a href='forgot-password.php'> Please click here to update your password to our new
+"ACCOUNT_USER_OR_PASS_INVALID2"		=> "We have upgraded our technology to better protect your account.<a href='forgot-password.php'> Please click here to update your password to our new 
 system.</a> We are sorry for the inconvenience.",
 
 Feel free to get creative there.
@@ -87,3 +87,7 @@ Feel free to get creative there.
 6. Use as normal! Visit http://userspice.com if you have any issues.
 
 7 Make sure to visit your admin section and set the permissions for each page to your liking. There will be better default settings in a future release.
+
+
+
+

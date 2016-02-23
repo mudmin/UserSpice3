@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -18,12 +19,6 @@ require_once("models/config.php");
 if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
-
-<!-- If you are going to include the sidebar, do it here -->
-
-</div>
-<!-- /.navbar-collapse -->
-</nav>
 <!-- PHP GOES HERE -->
 <?php
 //User has confirmed they want their password changed
@@ -200,71 +195,24 @@ if(!empty($_POST))
 ?>
 
 
-<div id="page-wrapper">
-	<!-- Main jumbotron for a primary marketing message or call to action -->
-
-	<!-- <div class="jumbotron">
-	<div class="container">
-	<h1>Jumbotron!!!</h1>
-	<p>This is a great area to highlight something.</p>
-	<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
-</div> -->
-
-<div class="container-fluid">
-
-	<!-- Page Heading -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				Forgot Password
-			</h1>
-			<!-- CONTENT GOES HERE -->
-
-			<?php
-			echo resultBlock($errors,$successes);
-
-			echo "
-			<div id='regbox'>
-			<form name='newLostPass' action='".$_SERVER['PHP_SELF']."' method='post'>
-			<p>
-			<label>Username:</label>
-			<input class='form-control' type='text' name='username' />
-			</p>
-			<p>
-			<label>Email:</label>
-			<input class='form-control' type='text' name='email' />
-			</p>
-			";
-			?>
-			<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
-			<?php echo "
-			<p>
-			<label>&nbsp;</label>
-			<input class='btn btn-primary' type='submit' value='Submit' class='submit' />
-			</p>
-			</form>
-			";
-
-			?>
-
-
-
-
-
-
-		</div>
+<div class="container">
+	<?php echo resultBlock($errors,$successes); ?>     
+	<div class="form-signin">
+		<form name="newLostPass" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+		<h2 class="form-signin-heading">Forgot Password</h2>
+	<div class="form-group">	
+        <label for="username">Username</label>
+        <input  class="form-control" type="text" name="username" id="username" placeholder="Username" required autofocus>
+	  </div>
+	  <div class="form-group">	
+        <label for="email">Email</label>
+        <input type="email" class="form-control"  name="email" id="email"  placeholder="Email" required>
 	</div>
-	<!-- /.row -->
-
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
+	<button class="submit  btn btn-lg btn-primary btn-block" type="submit">Get Password</button>
+	<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
+	</form>
+  </div>	
+</div> <!-- /container -->
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>
 

@@ -2,13 +2,13 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
 UserCake created by: Adam Davis
 UserCake V2.0 designed by: Jonathan Cassels
 */
-<?php
 class DB {
 	private static $_instance = null;
 	private $_pdo, $_query, $_error = false, $_results, $_resultsArray, $_count = 0, $_lastId;

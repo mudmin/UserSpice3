@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -11,7 +12,7 @@ UserCake V2.0 designed by: Jonathan Cassels
 
 //Database Information
 $db_host = "127.0.0.1"; //Host address (most likely localhost)
-$db_name = "ustest"; //Name of Database
+$db_name = "us3oc"; //Name of Database
 $db_user = "root"; //Name of database user
 $db_pass = ""; //Password for database user
 $db_table_prefix = "uc_";

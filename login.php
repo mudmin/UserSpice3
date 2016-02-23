@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -22,11 +23,6 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
 
-<!-- If you are going to include the sidebar, do it here -->
-<?php //require_once("models/left-nav.php"); ?>
-</div>
-<!-- /.navbar-collapse -->
-</nav>
 <!-- PHP GOES HERE -->
 <?php
 //Prevent the user visiting the logged in page if he/she is already logged in
@@ -126,64 +122,45 @@ if ($response != null && $response->success) {
 
 ?>
 
-<div id="page-wrapper">
-	<!-- Main jumbotron for a primary marketing message or call to action -->
+ <div class="container">
 
-	<!-- <div class="jumbotron">
-	<div class="container">
-	<h1>Jumbotron!!!</h1>
-	<p>This is a great area to highlight something.</p>
-	<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
-</div> -->
+	 <?php
+	echo resultBlock($errors,$successes); ?>
 
-<div class="container-fluid">
+	<div class="form-signin">
 
-	<!-- Page Heading -->
-	<div class="row">
-		<div class="col-lg-3"></div>
-		<div class="col-lg-6">
-			<h1 class="page-header">
-				Login
-			</h1>
-			<!-- CONTENT GOES HERE -->
+		<form class="" name="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-			<?php
-			echo resultBlock($errors,$successes);
-			echo "
-			<div id='regbox'>
-			<form name='login' action='".$_SERVER['PHP_SELF']."' method='post'>
-			<p>
-			";
-			?>
-			<label>Username:</label>
-			<input  class='form-control' type='text' name='username' />
-		</p>
-		<p>
-			<label>Password:</label>
-			<input  class='form-control'  type='password' name='password' />
-		</p>
-		<p><label>Please enter the words as they appear:</label>
-			<div class="g-recaptcha" data-sitekey="<?php echo $publickey; ?>"></div>
-		</p>
-		<p>
-			<label>&nbsp;</label>
-			<input class='btn btn-primary' type='submit' value='Login' class='submit' />
-		</p>
-		<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
+        <h2 class="form-signin-heading">Please sign in</h2>
+
+	  <div class="form-group">
+        <label for="username">Username</label>
+        <input  class="form-control" type="text" name="username" id="username" placeholder="Username" required autofocus>
+	  </div>
+	  <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control"  name="password" id="password"  placeholder="Password" required>
+	</div>
+	<div class="form-group">
+       <label>Please enter the words as they appear:</label>
+		<div class="g-recaptcha" data-sitekey="<?php echo $publickey; ?>"></div>
+	</div>
+
+	<button class="submit  btn btn-lg btn-primary btn-block" type="submit">Login</button>
+	<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
 	</form>
-</div>
-</div>
-<!-- /.row -->
 
-</div>
-<!-- /.container-fluid -->
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="pull-left" href='forgot-password.php'>Forgot Password</a>
+			</div>
+			<div class="col-xs-6">
+				<a class="pull-right" href='register.php'>Sign Up</a>
+			</div>
+		</div>
 
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
+	  </div>
+</div> <!-- /container -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>

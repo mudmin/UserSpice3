@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -16,12 +17,6 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
 
-<!-- If you are going to include the sidebar, do it here -->
-
-</div>
-<!-- /.navbar-collapse -->
-</nav>
-<!-- PHP GOES HERE -->
 <?php
 $userId = $_GET['id'];
 
@@ -158,157 +153,185 @@ $userPermission = fetchUserPermissions($userId);
 $permissionData = fetchAllPermissions();
 
 ?>
+<div class="container-fluid" style="">
+  
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+         <div class="col-sm-6 col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+				<p class="visible-xs">
+                <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+              </p>
+	
+	<?php require_once("models/left-nav.php"); ?>
 
-
-<div id="page-wrapper">
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-
-  <!-- <div class="jumbotron">
-  <div class="container">
-  <h1>Jumbotron!!!</h1>
-  <p>This is a great area to highlight something.</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
-</div> -->
-
-<div class="container-fluid">
-  <?php require_once("models/account-nav.php"); ?>
+   </div><!--/span-->
+        
+        <div class="col-sm-6 col-md-9 col-lg-10 main">
+  
+          <!--toggle sidebar button-->
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+          </p>
+       <?php resultBlock($errors,$successes); ?>
   <!-- Page Heading -->
   <div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
+    <div class="col-md-12">
       <h1 >
         Edit User
       </h1>
       <!-- CONTENT GOES HERE -->
+	<form name="adminUser" action="<?php echo $_SERVER['PHP_SELF']?>?id=<?php echo $userId;?>" method="post">
+	
+		<div class="row">
+				<div class="col-md-6">
+				 <h3>User Information</h3>
+					<div class="form-group">
+					  <label>ID:</label>
+					  <?php echo $userdetails['id'];?>
+					  </div>
+					<div class="form-group">
+					  <label>Username:</label>
+					  <?php echo $userdetails['user_name'];?>
+					  </div>
+					<div class="form-group row">
+						<div class="col-md-9">
+						  <label for="display">Display Name:</label>
+						  <input  class="form-control" type="text" name="display" id="display" value="<?php echo $userdetails['display_name'];?>" />
+						  </div>
+						 </div>
+					<div class="form-group row">
+						<div class="col-md-9">
+						  <label for="display">Email:</label>
+						  <input  class="form-control" type="text" name="email" id="email" value="<?php echo $userdetails['email'];?>" />
+						  </div>
+						</div>
+					<div class="form-group">
+					  <label>Active:</label>
+						<?php //Display activation link, if account inactive
+						if ($userdetails['active'] == '1'){
+						echo "Yes";
+						}
+					  else{
+						echo 'No
+						<label for="activate" >Activate:</label>
+						<input type="checkbox" name="activate" id="activate" value="activate">
+						';
+					  }
+					  ?>	
+					  </div>
+					  
+					<div class="form-group row">
+						<div class="col-md-9">
+						  <label for="display">Title:</label>
+						  <input  class="form-control" type="text" name="title" id="title" value="<?php echo $userdetails['title'];?>" />
+						  </div>
+						</div>
 
-      <?php
-      echo resultBlock($errors,$successes);
-
-      echo "
-      <form name='adminUser' action='".$_SERVER['PHP_SELF']."?id=".$userId."' method='post'>
-      <table class='table'><tr><td>
-      <h3>User Information</h3>
-      <div id='regbox'>
-      <p>
-      <label>ID:</label>
-      ".$userdetails['id']."
-      </p>
-      <p>
-      <label>Username:</label>
-      ".$userdetails['user_name']."
-      </p>
-      <p>
-      <label>Display Name:
-      <input  class='form-control' type='text' name='display' value='".$userdetails['display_name']."' /></label>
-      </p>
-      <p>
-      <label>Email:
-      <input class='form-control' type='text' name='email' value='".$userdetails['email']."' /></label>
-      </p>
-      <p>
-      <label>Active:</label>";
-
-      //Display activation link, if account inactive
-      if ($userdetails['active'] == '1'){
-        echo "Yes";
-      }
-      else{
-        echo "No
-        </p>
-        <p>
-        <label>Activate:</label>
-        <input type='checkbox' name='activate' id='activate' value='activate'>
-        ";
-      }
-
-      echo "
-      </p>
-      <p>
-      <label>Title:
-      <input  class='form-control' type='text' name='title' value='".$userdetails['title']."' /></label>
-      </p>
-      <p>
-      <label>Sign Up:  </label>
-      ".date("j M, Y", $userdetails['sign_up_stamp'])."
-      </p>
-      <p>
-      <label>Last Sign In:  </label>  ";
-
-      //Last sign in, interpretation
-      if ($userdetails['last_sign_in_stamp'] == '0'){
-        echo "Never";
-      }
-      else {
-        echo date("j M, Y", $userdetails['last_sign_in_stamp']);
-      }
-
-      echo "
-      </p>
-      <p>
-      <label>Delete:</label>
-      <input type='checkbox' name='delete[".$userdetails['id']."]' id='delete[".$userdetails['id']."]' value='".$userdetails['id']."'>
-      </p>
-      <p>
-      <label>&nbsp;</label>
-      <input class='btn btn-primary' type='submit' value='Update' class='submit' />
-      </p>
-      </div>
-      </td>
-      <td>
-      <h3>Permission Membership</h3>
-      <div id='regbox'>
-      <p>Remove Permission:";
-
-      //List of permission levels user is apart of
-      foreach ($permissionData as $v1) {
-        if(isset($userPermission[$v1['id']])){
-          echo "<br><input type='checkbox' name='removePermission[".$v1['id']."]' id='removePermission[".$v1['id']."]' value='".$v1['id']."'> ".$v1['name'];
-        }
-      }
-
-      //List of permission levels user is not apart of
-      echo "</p><p>Add Permission:";
-      foreach ($permissionData as $v1) {
-        if(!isset($userPermission[$v1['id']])){
-          echo "<br><input type='checkbox' name='addPermission[".$v1['id']."]' id='addPermission[".$v1['id']."]' value='".$v1['id']."'> ".$v1['name'];
-        }
-      }
-
-      echo"
-      </p>
-      </div>
-      </td>
-      </tr>
-      </table>
-      ";
-      ?>
-      <input type="hidden" name="csrf" value="<?=Token::generate();?>" >
-      <?php echo "
-      </form>
-      ";
-      ?>
+					<div class="form-group">
+					  <label for="display">Sign Up:</label>
+					  <?php echo date("j M, Y", $userdetails['sign_up_stamp']);?>
+					  </div>
+					  
+					<div class="form-group">
+					  <label for="display">Last Sign In:</label>
+					  <?php 
+					  //Last sign in, interpretation
+					  if ($userdetails['last_sign_in_stamp'] == '0'){
+						echo "Never";
+					  }
+					  else {
+						echo date("j M, Y", $userdetails['last_sign_in_stamp']);
+					  }
+					  ?>
+					  </div>
 
 
+					<div class="form-group">
+					  <label>Delete (No warning):</label>
+					  <input type="checkbox" name="delete[<?php echo $userdetails['id'];?>]" id="delete[<?php echo $userdetails['id'];?>]" value="<?php echo $userdetails['id'];?>">
+					  </div>
+					  
+				</div><!-- /col -->
+				
+				<div class="col-md-6">
+				<h3>Permission Membership</h3>
+				
+					<div class="form-group">
+					  <label>Remove Permission:</label>
+								<ul>
+					        <?php //List of permission levels user is apart of
+						  foreach ($permissionData as $v1) {
+							if(isset($userPermission[$v1['id']])){
+							  echo "<li><input type='checkbox' name='removePermission[".$v1['id']."]' id='removePermission[".$v1['id']."]' value='".$v1['id']."'> ".$v1['name']."</li>";
+							}
+						  }
+						  ?>
+							</ul>			  
+					 </div>
+
+					<div class="form-group">
+					  <label>Add Permission:</label>
+								<ul>
+					        <?php //List of permission levels user is apart of
+								  foreach ($permissionData as $v1) {
+								if(!isset($userPermission[$v1['id']])){
+								  echo "<li><input type='checkbox' name='addPermission[".$v1['id']."]' id='addPermission[".$v1['id']."]' value='".$v1['id']."'> ".$v1['name']."</li>";
+							}
+						  }
+						  ?>
+							</ul>			  
+					 </div>					 
+				
+				</div><!-- /col -->
+				
+		</div><!-- /col-md-4 -->
+
+			<div class="row">
+		<div class="col-md-12">
+		  <input type="hidden" name="csrf" value="<?=Token::generate();?>" >
+
+		<div class="form-group">
+		  <label>&nbsp;</label>
+		  <input class='btn btn-primary' type='submit' value='Update User' />
+		  <a href='admin_users.php' class='btn btn-danger'>Cancel</a>
+		  </div>
+		</div>
+	</div>
+</form>
+		
+	 </div> <!-- /col -->
+
+</div> <!-- /row -->
 
 
 
 
-    </div>
-  </div>
-  <!-- /.row -->
-
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>
 
+
+      </div><!--/main-split-row-->
+	</div>
+</div><!--/.container-->
 <!-- Place any per-page javascript here -->
+
+<script type="text/javascript">
+$(document).ready(function(){  
+ 
+ $( "#Submit" ).click(function(e) {
+ 
+	 	var answer = confirm("Delete User - Are you sure?")
+		if (answer)
+			{
+			return true;
+			}
+		else	
+			{
+			return false;
+			}
+		});
+       
+    });
+</script>
 
 <?php require_once("models/html_footer.php"); // currently just the closing /body and /html ?>

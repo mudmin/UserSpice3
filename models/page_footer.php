@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -16,23 +17,21 @@ UserCake V2.0 designed by: Jonathan Cassels
 */
 require_once("settings.php");
 ?>
-<style>
-p {
-  font-color:white;
-}
-</style>
-<div class="container">
-  <div class="col-md-12">
-    <footer>
-      <br><strong><p align="center" style="color:white">&copy; <?php echo $copyright_message; ?></p></strong>
-      <?php if($your_public_key  == "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI") {
-        echo "<h3 align='center'style='color:white'>For security reasons, you need to change your reCAPTCHA key.</h3>";
-      }
-      ?>
-    </footer>
-  </div>
+<div class="container" style="">
+	<div class="row">
+	  <div class="col-md-12">
+		<div id="footer">
+			<footer>
+			  &copy; <?php echo $copyright_message; ?>
+			  <?php if($your_public_key  == "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI") {
+				echo "<h3>For security reasons, you need to change your reCAPTCHA key.</h3>";
+			  }
+			  ?>
+			</footer>
+		</div>
+	  </div>
+	</div>
 </div>
-<!-- /container -->
 
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -49,7 +48,4 @@ p {
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+<script src="js/user.js"></script>

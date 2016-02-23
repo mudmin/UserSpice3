@@ -1,6 +1,6 @@
 <?php
 /*
-UserCake Version: 3.1.0
+UserCake Version: 3.2.0
 
 */
 
@@ -9,6 +9,12 @@ UserCake Version: 3.1.0
 */
 
 $lang = array();
+
+//Navigation
+$lang = array_merge($lang,array(
+	"NAVTOP_HELPTEXT"				=> "Login Help",
+	));
+
 
 //Account
 $lang = array_merge($lang,array(

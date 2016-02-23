@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -18,12 +19,6 @@ require_once("models/config.php");
 if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
-
-<!-- If you are going to include the sidebar, do it here -->
-
-</div>
-<!-- /.navbar-collapse -->
-</nav>
 <!-- PHP GOES HERE -->
 <?php
 //Forms posted
@@ -136,24 +131,10 @@ if(isUserLoggedIn()) { header("Location: account.php"); die(); }
 
 ?>
 
-
-
-
-
-
-
-<div id="page-wrapper">
-	<!-- Main jumbotron for a primary marketing message or call to action -->
-
-	<!-- <div class="jumbotron">
-	<div class="container">
-	<h1>Jumbotron!!!</h1>
-	<p>This is a great area to highlight something.</p>
-	<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
-</div> -->
-
 <div class="container-fluid">
+<?php  echo resultBlock($errors,$successes); ?>
+
+	<div class="form-signin">
 
 	<!-- Page Heading -->
 	<div class="row">
@@ -164,11 +145,6 @@ if(isUserLoggedIn()) { header("Location: account.php"); die(); }
 			<!-- CONTENT GOES HERE -->
 
 			<?php
-
-			echo resultBlock($errors,$successes);
-
-			echo "<div id='regbox'>";
-
 			//Show disabled if email activation not required
 			if(!$emailActivation)
 			{
@@ -176,44 +152,38 @@ if(isUserLoggedIn()) { header("Location: account.php"); die(); }
 			}
 			else
 			{
-				echo "<form name='resendActivation' action='".$_SERVER['PHP_SELF']."' method='post'>
-				<p>
-				<label>Username:</label>
-				<input class='form-control' type='text' name='username' />
-				</p>
-				<p>
-				<label>Email:</label>
-				<input class='form-control' type='text' name='email' />
-				</p>
-				";
-				?>
+			?>
+			<form name="resendActivation" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+			  <div class="form-group">		
+				<label for="username">Username:</label>
+				<input class="form-control" type="text" name="username" id="username" />
+				</div>
+				
+				 <div class="form-group">		
+				<label for="email">Email:</label>
+				<input class="form-control" type="text" name="email" id="email" />
+				</div>
+				
 				<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
-				<?php echo "
-				<p>
+	
+				 <div class="form-group">		
 				<label>&nbsp;</label>
-				<input class='btn btn-primary' type='submit' value='Submit' class='submit' />
-				</p>
-				</form>";
+				<input class="btn btn-primary" type="submit" value="Resend" />
+				</div>
+				</form>
+			<?php
 			}
 			?>
 
 
-
-
-
-
+			</div>
 		</div>
-	</div>
-	<!-- /.row -->
-
+		<!-- /.row -->
+	</div><!-- /.siognin -->
 </div>
 <!-- /.container-fluid -->
 
-</div>
-<!-- /#page-wrapper -->
 
-</div>
-<!-- /#wrapper -->
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>
 

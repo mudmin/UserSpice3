@@ -131,7 +131,7 @@ if(isset($_GET["install"]))
 	(4, 'activation', 'false'),
 	(5, 'resend_activation_threshold', '0'),
 	(6, 'language', 'models/languages/en.php'),
-	(7, 'template', 'models/site-templates/default.css');
+	(7, 'template', 'css/bootstrap.min.css');
 	";
 
 	$pages_sql = "CREATE TABLE IF NOT EXISTS `".$db_table_prefix."pages` (

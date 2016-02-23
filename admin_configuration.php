@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -19,11 +20,6 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
 
-<!-- If you are going to include the sidebar, do it here -->
-
-</div>
-<!-- /.navbar-collapse -->
-</nav>
 <!-- PHP GOES HERE -->
 <?php if(!empty($_POST))
 {
@@ -158,27 +154,28 @@ $permissionData = fetchAllPermissions(); //Retrieve list of all permission level
 ?>
 
 
+<div class="container-fluid" style="">
+  
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+         <div class="col-sm-6 col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+				<p class="visible-xs">
+                <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+              </p>
+	
+	<?php require_once("models/left-nav.php"); ?>
 
-
-
-
-
-<div id="page-wrapper">
-	<!-- Main jumbotron for a primary marketing message or call to action -->
-
-	<!-- <div class="jumbotron">
-	<div class="container">
-	<h1>Jumbotron!!!</h1>
-	<p>This is a great area to highlight something.</p>
-	<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
-</div> -->
-
-<div class="container-fluid">
-	<?php require_once("models/account-nav.php"); ?>
-	<!-- Page Heading -->
+   </div><!--/span-->
+        
+    <div class="col-sm-6 col-md-9 col-lg-10 main">
+   
+	  <!--toggle sidebar button-->
+	  <p class="visible-xs">
+		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+	  </p>
+        <?php resultBlock($errors,$successes); ?>
+  <!-- Page Heading -->
 	<div class="row">
-		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
 			<h1 class="page-header">
 				Admin Configuration
@@ -188,7 +185,6 @@ $permissionData = fetchAllPermissions(); //Retrieve list of all permission level
 			echo resultBlock($errors,$successes);
 
 			echo "
-			<div id='regbox'>
 			<form name='adminConfiguration' action='".$_SERVER['PHP_SELF']."' method='post'>
 			<p>
 			<label>Website Name:</label>
@@ -260,32 +256,24 @@ $permissionData = fetchAllPermissions(); //Retrieve list of all permission level
 		</select>
 	</p>
 	<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
-	<input  class='btn btn-primary' type='submit' name='Submit' value='Submit' />
+	<input  class="btn btn-primary" type="submit" name="Submit" value="Update Configuration" />
+	<a href="account.php" class="btn btn-danger">Cancel</a>
 </form>
 
 
+	 </div> <!-- /col -->
+
+  
+</div> <!-- /row -->
 
 
 
-
-
-
-
-</div>
-</div>
-<!-- /.row -->
-
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>
 
+      </div><!--/main-split-row-->
+	</div>
+</div><!--/.container-->
 <!-- Place any per-page javascript here -->
 
 <?php require_once("models/html_footer.php"); // currently just the closing /body and /html ?>

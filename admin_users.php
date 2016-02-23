@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -19,11 +20,7 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
 
-<!-- If you are going to include the sidebar, do it here -->
 
-</div>
-<!-- /.navbar-collapse -->
-</nav>
 <!-- PHP GOES HERE -->
 <?php
 //Forms posted
@@ -44,25 +41,30 @@ if(!empty($_POST))
 
 $userData = fetchAllUsers(); //Fetch information for all users
 ?>
+<div class="container-fluid" style="">
+  
 
 
+    
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+         <div class="col-sm-6 col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+				<p class="visible-xs">
+                <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+              </p>
+	
+	<?php require_once("models/left-nav.php"); ?>
 
+   </div><!--/span-->
+        
+        <div class="col-sm-6 col-md-9 col-lg-10 main">
+  
 
+          <!--toggle sidebar button-->
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+          </p>
 
-
-<div id="page-wrapper">
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-
-  <!-- <div class="jumbotron">
-  <div class="container">
-  <h1>Jumbotron!!!</h1>
-  <p>This is a great area to highlight something.</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
-</div> -->
-
-<div class="container-fluid">
-  <?php require_once("models/account-nav.php"); ?>
   <!-- Page Heading -->
   <div class="row">
     <div class="col-lg-12">
@@ -72,24 +74,20 @@ $userData = fetchAllUsers(); //Fetch information for all users
       <!-- CONTENT GOES HERE -->
 
       <?php
-      echo resultBlock($errors,$successes);
+      echo resultBlock($errors,$successes); ?>
 
-      echo "
-      <form name='adminUsers' action='".$_SERVER['PHP_SELF']."' method='post'>
-      <table class='table table-hover'>
-      ";
-      ?>
-      <input type="hidden" name="csrf" value="<?=Token::generate();?>" >
-      <?php echo "
-      <tr>
-      <th>Delete</th><th>Username</th><th>Display Name</th><th>Title</th><th>Last Sign In</th>
-      </tr>";
-
-      //Cycle through users
+      <form name="adminUsers" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+      <div class="table-responsive">
+		<table class="table table-hover">
+		<tr>
+			<th>Delete</th><th>Username</th><th>Display Name</th><th>Title</th><th>Last Sign In</th>
+		</tr>
+	
+		<?php //Cycle through users
       foreach ($userData as $v1) {
         echo "
         <tr>
-        <td><input type='checkbox' name='delete[".$v1['id']."]' id='delete[".$v1['id']."]' value='".$v1['id']."'></td>
+        <td>	<div class='form-group'><input type='checkbox' name='delete[".$v1['id']."]' id='delete[".$v1['id']."]' value='".$v1['id']."'></div></td>
         <td><a href='admin_user.php?id=".$v1['id']."'>".$v1['user_name']."</a></td>
         <td>".$v1['display_name']."</td>
         <td>".$v1['title']."</td>
@@ -107,34 +105,44 @@ $userData = fetchAllUsers(); //Fetch information for all users
         </td>
         </tr>";
       }
+	  ?>
 
-      echo "
       </table>
-      <input class='btn btn-primary' type='submit' name='Submit' value='Delete' />
-      </form>
-      ";
-      ?>
+	 </div> <!-- /table-responsive -->
+ 
+	<input class="btn btn-primary" type="submit" id="Submit" name="Submit" value="Delete User" />
+	<input type="hidden" name="csrf" value="<?=Token::generate();?>" >
+	  </form>
+			
+	 </div> <!-- /col -->
+</div> <!-- /row -->
 
 
 
 
-
-
-    </div>
-  </div>
-  <!-- /.row -->
-
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>
-
+      </div><!--/main-split-row-->
+	</div>
+</div><!--/.container-->
 <!-- Place any per-page javascript here -->
+<script type="text/javascript">
+$(document).ready(function(){  
+ 
+ $( "#Submit" ).click(function(e) {
+	 	var answer = confirm("Delete User - Are you sure?")
+		if (answer)
+			{
+			return true;
+			}
+		else	
+			{
+			return false;
+			}
+
+		});
+       
+    });
+</script>
 
 <?php require_once("models/html_footer.php"); // currently just the closing /body and /html ?>

@@ -2,6 +2,7 @@
 /*
 UserSpice 3
 by Dan Hoover at http://UserSpice.com
+Major code contributions by Astropos
 
 a modern version of
 UserCake Version: 2.0.2
@@ -19,11 +20,6 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 ?>
 <?php require_once("models/top-nav.php"); ?>
 
-<!-- If you are going to include the sidebar, do it here -->
-
-</div>
-<!-- /.navbar-collapse -->
-</nav>
 <!-- PHP GOES HERE -->
 <?php
 $pages = getPageFiles(); //Retrieve list of pages in root usercake folder
@@ -64,31 +60,41 @@ $dbpages = fetchAllPages();
 
 
 
-<div id="page-wrapper">
-  <!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="container-fluid" style="">
 
-  <!-- <div class="jumbotron">
-  <div class="container">
-  <h1>Jumbotron!!!</h1>
-  <p>This is a great area to highlight something.</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
-</div> -->
 
-<div class="container-fluid">
-  <?php require_once("models/account-nav.php"); ?>
+
+
+      <div class="row row-offcanvas row-offcanvas-left">
+
+         <div class="col-sm-6 col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+				<p class="visible-xs">
+                <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+              </p>
+
+	<?php require_once("models/left-nav.php"); ?>
+
+   </div><!--/span-->
+
+        <div class="col-sm-6 col-md-9 col-lg-10 main">
+
+
+
+          <!--toggle sidebar button-->
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="fa fa-fw fa-caret-square-o-left"></i></button>
+          </p>
+
   <!-- Page Heading -->
   <div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
+    <div class="col-md-6">
       <h1>
         Admin Pages
       </h1>
       <!-- CONTENT GOES HERE -->
 
       <?php
-      echo "
-      <div id='main'>
+      echo "<div class='table-responsive'>
       <table class='table table-hover'>
       <tr><th>Id</th><th>Page</th><th>Access</th></tr>";
 
@@ -118,28 +124,21 @@ $dbpages = fetchAllPages();
       }
 
       ?>
-    </table>
+    </table></div> <!-- /table-responsive -->
 
 
+	 </div> <!-- /col -->
 
 
+</div> <!-- /row -->
 
 
-  </div>
-</div>
-<!-- /.row -->
-
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 <!-- footers -->
 <?php require_once("models/page_footer.php"); // the final html footer copyright row + the external js calls ?>
 
+      </div><!--/main-split-row-->
+	</div>
+</div><!--/.container-->
 <!-- Place any per-page javascript here -->
 
 <?php require_once("models/html_footer.php"); // currently just the closing /body and /html ?>

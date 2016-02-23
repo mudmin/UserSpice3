@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project was originally based on Version 2.0.2 of UserCake (usercake.com), which was released in 2012.
 
+### 3.2.0 - 2016-02-09
+### Changed
+- New off canvas menus.
+- New cleaner top menus.
+- Improvements to the language files
+- The code has been de-linted and cleaned up.
+- Better comments in the code.
+- 100% of the credit for this release goes to user Astropos
+### 3.1.0b - 2016-01-24
+### Changed
+- Removed an extra set of body tags from one of the footers.  
+- Renamed the install folder from install-renamed to install (I always rename it for dev purposes)
 
 ### 3.1.0 - 2016-01-23
 ### Changed
